@@ -18,7 +18,7 @@ def main():
 		#print(hum)
 		printTH(temp, hum)
 		x = x + 1
-		if x == 20:
+		if x == 1:
 			break
 
 if __name__ == '__main__':

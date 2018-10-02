@@ -1,5 +1,6 @@
-# coding: utf-8
-import smbus
+#from time import *
+import time
+from grovepi import *
 
 bus = smbus.SMBus(1)  # pour I2C-1 (0 pour I2C-0)
 
@@ -10,21 +11,21 @@ DISPLAY_RGB_ADDR = 0x62
 DISPLAY_TEXT_ADDR = 0x3e
 
 
-# Décommentez et completez le code de la fonction permettant de choisir
+# Decommentez et completez le code de la fonction permettant de choisir
 # la couleur du fond d'ecran, n'oubliez pas d'initialiser l'ecran
 def setRGB(rouge,vert,bleu):
-	# rouge, vert et bleu sont les composantes de la couleur demandée
+	# rouge, vert et bleu sont les composantes de la couleur demandee
 	bus.write_byte_data(DISPLAY_RGB_ADDR,0x00,0x00)
 	bus.write_byte_data(DISPLAY_RGB_ADDR,0x01,0x00)
+	bus.write_byte_data(DISPLAY_RGB_ADDR,0x08,0xaa)
 	bus.write_byte_data(DISPLAY_RGB_ADDR,0x04,rouge) # <--- ?
 	bus.write_byte_data(DISPLAY_RGB_ADDR,0x03,vert) # <--- ?
 	bus.write_byte_data(DISPLAY_RGB_ADDR,0x02,bleu) # <--- ?
-	bus.write_byte_data(DISPLAY_RGB_ADDR,0x08,0xAA)
-	print("Couleur écran changée")
+	print("Couleur ecran changee")
 
 # Envoie  a l'ecran une commande concerant l'affichage des caracteres
 # (cette fonction vous est donnes gratuitement si vous
-# l'utilisez dans la fonction suivante, sinon donnez 2000€
+# lutilisez dans la fonction suivante, sinon donnez 2000
 # a la banque et allez directement en prison :)
 def textCmd(cmd):
 	bus.write_byte_data(DISPLAY_TEXT_ADDR,0x80,cmd)
@@ -34,19 +35,31 @@ def textCmd(cmd):
 # le retour a la ligne
 def setText(texte):
 	textCmd(0x01)
-	textCmd(0x0F)
-	textCmd(0x38) #pour avoir 2 lignes
-	for i in range (0,len(texte)-1) :
-		c = texte[i]
-		if (c=='\n' or i==17):  # si on depasse 16 caracteres
-			textCmd(0xc0)
-		if (c=='\n') : 
-			i=i+1
-			c=texte[i]
-		bus.write_byte_data(DISPLAY_TEXT_ADDR,0x40,0x10)#pour afficher c à l'écran
-	print ("texte ecrit")
+	time.sleep(0.05)
+	textCmd(0x08 | 0x04)	
 
-#la fonction permet de paramétrer les couleurs
+	#textCmd(0x0F)
+	textCmd(0x28) #pour avoir 2 lignes
+	time.sleep(0.05)
+	count = 0
+	row = 0
+
+	while len(texte) < 32:
+		texte+= ' '
+
+	for c in texte:
+		if c == '\n' or count == 16:
+			count = 0
+			row +=1
+			if row == 2:
+				break
+			textCmd(0xc0)
+			if c == '\n':
+				continue
+		count += 1
+		bus.write_byte_data(DISPLAY_TEXT_ADDR,0x40,ord(c))
+
+#la fonction permet de parametrer les couleurs
 def setColor(y): 
 	if y=="Blanc":
 		setRGB(0xFF,0xFF,0xFF)

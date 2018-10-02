@@ -22,7 +22,8 @@ def saveTH(temperature,humidite):
 	# et l'humidite actuelles de cette heure.
 	# Donnees : temperature : float, humidite : float
 	# Resultat : -
-	pass
+	
+	dweepy.dweet({'Temperature' : temperature, 'Humidite' : humidite})
 
 def loadTH(heure):
 
