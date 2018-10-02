@@ -11,12 +11,14 @@ def getAdvice(codeAdvice):
 	# texte propre pour la difference de temp + humid.
 	# Donnees : codeAdvice : int, type of difference
 	# Resultat : advice : string
+	pass
 
 def playAdvice(advice):
 	# Fonction qui prend le conseil sous forme de texte et le 
 	# diffuse via les haut-parleurs.
 	# Donnees : codeAdvice : int, type of difference
 	# Resultat : advice : string
+	pass
 
 def getProximity():
 	# Fonction qui prendre la distance mesure par l'ultrason.
@@ -28,13 +30,13 @@ def userAtDoor():
 	# Fonction qui detecte si l'user est en train de partir de chez lui.
 	# Donnees : codeAdvice : int, type of difference
 	# Resultat : boolean, true if user is at the door
-	
+	pass	
 
 def userPushedButton():
 	# Fonction qui detecte si l'user demande l'avis en cette moment.
 	# Donnees : - 
-	# Resultat : pushed : boolean, true si l'user a appuyé sur le bouton
-
+	# Resultat : pushed : boolean, true si l'user a appuye sur le bouton
+	pass
 
 
 

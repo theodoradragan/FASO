@@ -1,6 +1,6 @@
 import dweepy
-import Adafruit_DHT
-
+#import Adafruit_DHT
+from grovepi import * 
 # Ca sera une bibliotheque pour gerer les temperatures et humidites : 
 # detecter, sauvegarder, chercher et comparer
 	
@@ -11,10 +11,10 @@ def detectTH():
 	# Resultat : Touple (humidite, temperature)
 
 
-	sensor = Adafruit_DHT.DHT11
-	pin = 4
-	humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
-	return (temperature,humidity)
+	dht_sensor_port = 4
+	dht_sensor_type = 0
+	[temperature, humidity] = dht(dht_sensor_port, dht_sensor_type)
+	return [temperature,humidity]
 
 def saveTH(temperature,humidite):
 	
@@ -50,5 +50,5 @@ def compareHeureTH(temp1, hum1):
 	pass
 
 if __name__ == '__main__':
-	t, h = detectTH()
+	[t, h] = detectTH()
 	print(t,h)

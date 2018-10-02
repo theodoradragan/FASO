@@ -6,9 +6,10 @@ def setRecipient(email):
 	# Fonction pour etablir le mail pour les alertes
 	# Donnee : nouveau mail de l'utilisateur, string
 	# Resultat : -
-
+	pass
 
 def sendMail(text):
 	# Fonction qui envoie un mail a l'utilisateur s'il y a le cas
 	# Donnee : text a envoyer a l'utilisateur, string
 	# Resultat : -
+	pass
