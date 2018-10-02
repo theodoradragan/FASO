@@ -3,7 +3,7 @@ import Adafruit_DHT
 
 # Ca sera une bibliotheque pour gerer les temperatures et humidites : 
 # detecter, sauvegarder, chercher et comparer
-
+	
 def detectTH():
 
 	# Fonction qui retourne la temperature et l'humidite
@@ -12,16 +12,17 @@ def detectTH():
 
 
 	sensor = Adafruit_DHT.DHT11
-	#pin = 23
+	pin = 4
 	humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
 	return (temperature,humidity)
 
 def saveTH(temperature,humidite):
 	
-	# Fonction qui crée et envoie un tweet avec la température 
-	# et l'humidité actuelles de cette heure.
+	# Fonction qui cree et envoie un tweet avec la temperature 
+	# et l'humidite actuelles de cette heure.
 	# Donnees : temperature : float, humidite : float
 	# Resultat : -
+	pass
 
 def loadTH(heure):
 
@@ -29,21 +30,25 @@ def loadTH(heure):
 	# stockees en forme de dweet.
 	# Donnees : heure : float
 	# Resultat : Tuple (temperature,humidite)
+	pass
 
 def compareJourTH(temp1, hum1):
 
-	# Fonction qui compare la température et l'humidité actuelles avec les paramètres
+	# Fonction qui compare la temperature et l'humidite actuelles avec les parametres
 	# de le jour dernier a la meme heure
-	# Donnees : temp1, hum1: paramètres environnementaux actuels	
+	# Donnees : temp1, hum1: parametres environnementaux actuels	
 	# Resultat : alert : int, code de alerte ( pour identifier apres le texte propre 
 	#                                         pour l'avis)
-
+	pass
 def compareHeureTH(temp1, hum1):
 
-	# Fonction qui compare deux ensembles de (température, humidité) 
-	# et "décide" si une alerte doit être donnée.
-	# Donnees : temp1, hum1: paramètres environnementaux actuels				
+	# Fonction qui compare deux ensembles de (temperature, humidite) 
+	# et "decide" si une alerte doit etre donnee.
+	# Donnees : temp1, hum1: parametres environnementaux actuels				
 	# Resultat : alert : int, code de alerte ( pour identifier apres le texte propre 
 	#                                         a envoyer par mail)
+	pass
 
-
+if __name__ == '__main__':
+	t, h = detectTH()
+	print(t,h)
