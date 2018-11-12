@@ -10,7 +10,4 @@ def printTH(temp, humid):
 	t = str(temp)
 	h = str(humid)
 	t = "Temp: " + t + "\nHum: " + h
-	print(t,h)
 	setText(t)
-	#setText(h)
-	#setText("Bonjour")

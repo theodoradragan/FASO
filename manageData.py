@@ -23,7 +23,7 @@ def saveTH(temperature,humidite):
 	# Donnees : temperature : float, humidite : float
 	# Resultat : -
 	
-	dweepy.dweet({'Temperature' : temperature, 'Humidite' : humidite})
+	dweepy.dweet_for('Assistant', {'Temperature' : temperature, 'Humidite' : humidite})
 
 def loadTH(heure):
 
@@ -53,3 +53,4 @@ def compareHeureTH(temp1, hum1):
 if __name__ == '__main__':
 	[t, h] = detectTH()
 	print(t,h)
+	saveTH(11,22)
