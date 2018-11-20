@@ -27,6 +27,12 @@ def saveTH(temperature,humidite):
 
 def loadTH(heure):
 
+	dweeps = dweepy.get_dweets_for('this_is_a_thing')
+	for dweep in dweeps:
+		created = dweep['created']
+		created_string = str(cr)
+		heure = (((s.split('T'))[1]).split(':'))[0]
+		minute = (((s.split('T'))[1]).split(':'))[1]
 	# Fonction qui donne la temperature et humidite d'une heure,
 	# stockees en forme de dweet.
 	# Donnees : heure : float
@@ -40,14 +46,26 @@ def compareJourTH(temp1, hum1):
 	# Donnees : temp1, hum1: parametres environnementaux actuels	
 	# Resultat : alert : int, code de alerte ( pour identifier apres le texte propre 
 	#                                         pour l'avis)
-	pass
-def compareHeureTH(temp1, hum1):
+	 
+def compareHeureTH(temp1, hum1, tempd, humd):
+
 
 	# Fonction qui compare deux ensembles de (temperature, humidite) 
 	# et "decide" si une alerte doit etre donnee.
 	# Donnees : temp1, hum1: parametres environnementaux actuels				
-	# Resultat : alert : int, code de alerte ( pour identifier apres le texte propre 
+	# Resultat : alert : (int, int) , code de alerte ( pour identifier apres le texte propre 
 	#                                         a envoyer par mail)
+
+	
+	DonneeDerniereHeure = dweepy.get_latest_dweet_for('Assistant')
+	diffTemp = temp1 - DonneeDerniereHeure[0]['content']['Temperature']
+	diffHum = hum1 - DonneeDerniereHeure[0]['content']['Humidite']
+	
+	return (diffTemp, diffHum)
+
+
+
+
 	pass
 
 if __name__ == '__main__':
