@@ -10,7 +10,6 @@ def detectTH():
 	# Donnees : -
 	# Resultat : Touple (humidite, temperature)
 
-
 	dht_sensor_port = 4
 	dht_sensor_type = 0
 	[temperature, humidity] = dht(dht_sensor_port, dht_sensor_type)
@@ -27,7 +26,7 @@ def saveTH(temperature,humidite):
 
 def loadTH(heure):
 
-	dweeps = dweepy.get_dweets_for('this_is_a_thing')
+	dweeps = dweepy.get_dweets_for('Assistant')
 	for dweep in dweeps:
 		created = dweep['created']
 		created_string = str(cr)

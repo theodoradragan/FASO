@@ -18,9 +18,9 @@ def setRGB(rouge,vert,bleu):
 	bus.write_byte_data(DISPLAY_RGB_ADDR,0x00,0x00)
 	bus.write_byte_data(DISPLAY_RGB_ADDR,0x01,0x00)
 	bus.write_byte_data(DISPLAY_RGB_ADDR,0x08,0xaa)
-	bus.write_byte_data(DISPLAY_RGB_ADDR,0x04,rouge) # <--- ?
-	bus.write_byte_data(DISPLAY_RGB_ADDR,0x03,vert) # <--- ?
-	bus.write_byte_data(DISPLAY_RGB_ADDR,0x02,bleu) # <--- ?
+	bus.write_byte_data(DISPLAY_RGB_ADDR,0x04,rouge)
+	bus.write_byte_data(DISPLAY_RGB_ADDR,0x03,vert)
+	bus.write_byte_data(DISPLAY_RGB_ADDR,0x02,bleu)
 	print("Couleur ecran changee")
 
 # Envoie  a l'ecran une commande concerant l'affichage des caracteres
