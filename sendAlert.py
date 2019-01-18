@@ -34,7 +34,7 @@ def getAlertText(diffT, codeDiffH): #deux codes : le premier pour la temperature
 
 	if diffT > 0:
 		strt = strt + "plus"
-	else
+	else:
 		strt = strt + "moins"
 	strt = strt + "que l'heure precedente.\n"
 

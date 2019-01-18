@@ -4,7 +4,18 @@ from grovepi import *
 # Ca sera une bibliotheque pour gerer les temperatures et humidites : 
 # detecter, sauvegarder, chercher et comparer
 	
-def detectTH():
+def detectTHInterieure():
+
+	# Fonction qui retourne la temperature et l'humidite
+	# Donnees : -
+	# Resultat : Touple (humidite, temperature)
+
+	dht_sensor_port = 3
+	dht_sensor_type = 0
+	[temperature, humidity] = dht(dht_sensor_port, dht_sensor_type)
+	return [temperature,humidity]
+
+def detectTHExterieure():
 
 	# Fonction qui retourne la temperature et l'humidite
 	# Donnees : -
@@ -45,6 +56,7 @@ def compareJourTH(temp1, hum1):
 	# Donnees : temp1, hum1: parametres environnementaux actuels	
 	# Resultat : alert : int, code de alerte ( pour identifier apres le texte propre 
 	#                                         pour l'avis)
+	pass
 	 
 def compareHeureTH(temp1, hum1, tempd, humd):
 
@@ -61,9 +73,6 @@ def compareHeureTH(temp1, hum1, tempd, humd):
 	diffHum = hum1 - DonneeDerniereHeure[0]['content']['Humidite']
 	
 	return (diffTemp, diffHum)
-
-
-
 
 	pass
 

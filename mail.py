@@ -12,15 +12,15 @@ def setRecipient(email):
 
 def setAlert():
 
-	alertString = "if(dweet.alertValue > 10) return 'TEST: Greater than 10';"+
-		"if(dweet.alertValue < 10) return 'TEST: Less than 10';"
+	alertString = "if(dweet.alertValue > 10) return 'TEST: Greater than 10';"
 
 
-	# dweepy.set_alert(
-	# 	[],
-	# 	alertString,
-	# 	'this-is-a-key',
-	# )
+	dweepy.set_alert(
+		'this-is-a-thing'
+		[globalEmail],
+		alertString,
+		'this-is-a-key',
+	)
 
 	print(alertString)
 
