@@ -7,11 +7,12 @@ from sendAlert import *
 from affichage import *
 from datetime import datetime # pour obtenir l'heure courant
 
-period = 10 # 10 secondes entre les detections, pour tester.
+period = 10 # 10 secondes entre les detections
+button = 8
+tempmoy = 17
 
 def readFromConfig():
-	# Reads running settings from the config file
-	pass
+	tempmoy = 17 # should be altered by config
 
 def main():
 	# dweepy.dweet_for('Assistant', {'Temperature' : 100, 'Humidite' : 100})
@@ -38,12 +39,21 @@ def main():
 
 		if x % 5 == 0 : # pour simuler une sortie periodique de l'user
 			playAdvice(getAdvice(tempInt, humInt, tempExt, humExt))
-			print("Hope you heard my advice !")
+		
+		setAlert(tempInt, humInt, tempmoy, tempExt)
+
+		# Turn off led if the button is pressed
+		try:
+        	if (grovepi.digitalRead(button)):
+        		turnOffLed()
+
+    	except IOError:
+        print ("Error")
 
 		x = x + 1
-		if x == 200:
+		if x == 2000:
 			break
-		# saveTH(tempInt, humInt, tempExt, humExt)
+		saveTH(tempInt, humInt)
 		time.sleep(period)
 
 if __name__ == '__main__':

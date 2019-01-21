@@ -48,27 +48,44 @@ cloVetements = {
 	0.05 : "cap",
 }
 
-humidexToAdvice = {
-	29 : "Peu de gens sont incommodés.",
-	34 : "Sensation de malaise plus ou moins grande.",
-	39 : "Sensation de malaise assez grande. Prudence. Ralentir certaines activités en plein air.",
-	45 : "Sensation de malaise généralisée.  Danger. Eviter les efforts.",
-	53 : "Danger extrême.  Arrêt de travail dans de nombreux domaines.",
-	100 : "Coup de chaleur imminent (danger de mort)."
-}
+humidexToAdvice = [
+	# (limite superieur pour cet avis, avis)
+	(29, "Peu de gens sont incommodés."),
+	(34, "Sensation de malaise plus ou moins grande."),
+	(39, "Sensation de malaise assez grande. Prudence. Ralentir certaines activités en plein air."),
+	(45, "Sensation de malaise généralisée.  Danger. Eviter les efforts."),
+	(53, "Danger extrême.  Arrêt de travail dans de nombreux domaines."),
+	(100, "Coup de chaleur imminent (danger de mort).")
+]
 
 # Lookup table for humidity index
 humidex = {
 	# temperature : [(humidity, humidex)]
-	21 : [(40, 21), (45, 22)],
-	# 22 :
-	# 23 : 
-	# 24 : 
+	# on a mis humidex 20 pour les valeurs non trouvees dans la recherche, seulement pour avoir tous les cas possibles
+	21 : [(20, 20), (25, 20), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	22 : [(20, 20), (25, 20), (30, 20), (35, 22), (40, 22), (45, 23), (50, 24), (55, 25), (60, 26), (65, 27), (70, 28), (75, 29), (80, 30), (85, 30), (90, 31), (95, 31), (100, 31)],
+	23 : [(20, 20), (25, 20), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	24 : [(20, 20), (25, 20), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	25 : [(20, 20), (25, 20), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	26 : [(20, 20), (25, 20), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	27 : [(20, 20), (25, 20), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	28 : [(20, 20), (25, 20), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	29 : [(20, 20), (25, 29), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	30 : [(20, 20), (25, 30), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	31 : [(20, 20), (25, 31), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	32 : [(20, 20), (25, 32), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	33 : [(20, 33), (25, 33), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	34 : [(20, 34), (25, 34), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	35 : [(20, 35), (25, 35), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	36 : [(20, 36), (25, 36), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	37 : [(20, 37), (25, 37), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	38 : [(20, 38), (25, 38), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	39 : [(20, 40), (25, 39), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	40 : [(20, 41), (25, 41), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	41 : [(20, 43), (25, 43), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
 }
-	
 
-
-ultrasonic_ranger = 4 # Digital entrance on board (D7)
+ultrasonic_ranger = 7 # Digital entrance on board (D7)
 
 def calculateCloNeeded(tempExt):
 	# Fonction qui calcule le clo indice pour savoir combien des vetements
@@ -76,7 +93,7 @@ def calculateCloNeeded(tempExt):
 	# Donnees : temperature Exterieure Courante
 	# Resultat : le clo indice, truncated avec 2 decimales (1,1234 devient 1,12 pour mieux calculer)
 	# On utilise le fait que, selon des recherches, 1 clo est necessaire pour se sentir
-	# confortable dans 21 degres Celcius
+	# confortable dans 21 degres Celsius
 
 	clo = tempExt / 21
 	roundedClo = round(clo, 2)
@@ -90,13 +107,20 @@ def getAdvice(tempExt, humExt):
 
 	advice = "Bonne journee !"
 	humIdxValue = 0
+	tempExtEntier = int(tempExt)
 
 	for (hum, humIdx) in humidex[tempExt]:
 		if hum < humExt:
 			humIdxValue = humExt
 
-	for adv in humidexToAdvice :
-		print()
+	i = 0
+	while i < len(humidexToAdvice):
+		(limiteSup, avis) = humidexToAdvice[i]
+		if limiteSup <= humIdxValue:
+			# We found the proper advice, we can stop searching for it
+			(_, advice) = humidexToAdvice[i - 1]
+			break
+		i = i + 1
 
 	return advice
 
@@ -127,8 +151,8 @@ def userAtDoor():
 	# Resultat : boolean, true if user is at the door
 
 	distance = getProximity()
-	print("Distance is")
-	print(distance)
+	print("Distance is") # --> Debugging purposes
+	print(distance) # --> Debugging purposes
 	if distance < 5:
 		return True
 		

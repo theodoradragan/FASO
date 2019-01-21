@@ -3,6 +3,7 @@ import dweepy
 # Ca sera une bibliotheque pour gerer les actions mail en regardant les alertes
 
 globalEmail = "theoa.dragan@yahoo.com"
+tempmoy = 17
 
 def setRecipient(email):
 	# Fonction pour etablir le mail pour les alertes
@@ -10,22 +11,13 @@ def setRecipient(email):
 	# Resultat : -
 	globalEmail = email
 
-def setAlert():
+def setAlert(diffT, temp, hum, tempmoy, tempext):
 
-	alertString = "if(dweet.alertValue > 10) return 'TEST: Greater than 10';"
-
-
+	alertResponse = getAlertText(diffT, temp, hum, tempmoy, tempext)
+	alertString = "if(dweet.Temperature >" + tempmoy +" 17) return ' " + alertResponse + "';"
 	dweepy.set_alert(
-		'this-is-a-thing'
+		'JarvisThing',
 		[globalEmail],
 		alertString,
 		'this-is-a-key',
 	)
-
-	print(alertString)
-
-def sendMail(text):
-	# Fonction qui envoie un mail a l'utilisateur s'il y a le cas
-	# Donnee : text a envoyer a l'utilisateur, string
-	# Resultat : -
-	pass

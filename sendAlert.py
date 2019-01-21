@@ -2,12 +2,12 @@
 import time
 from grovepi import *
 
-led = 2 #D2 port pour LED
+led = 2 # D2 port pour LED
 
 # Look up table for humidity, based on lower value of the range
 
 def turnOnLED():
-	# Fonction pour allumer le led
+	# Fonction pour allumer le led et le faire clignorer
 	pinMode(led,"OUTPUT")
 	time.sleep(1)
 
@@ -28,23 +28,33 @@ def turnOnLED():
 		except IOError:
 			print("Error")
 
-def getAlertText(diffT, temp, hum, tempmoy, tempext): 
+def turnOffLed():
 
-	# Deux parametres indiquant la difference par rapport à l'heure precedente : 
-	# Le premier pour la difference de temperature, le deuxieme pour la différence d'humidite
-	# Les quatres autres parametres son la temp actuelle ,l'hum actuelle et la temp moyenne definit dans le fichier config et la temp exterieure
-	strt = "Soyez attentif! Votre temperature est de"
-	strt = strt + abs(diffT) + "degres"
-	
-	if diffT > 0:
-		strt = strt + "superieur"
-	else
-		strt = strt + "inferieur"
-	strt = strt + " à l'heure precedente.\n"
+	pinMode(led,"OUTPUT")
+	time.sleep(1)
+	try:
+		digitalWrite(led,0)
+		print("LED OFF !")
+
+	except KeyboardInterrupt:
+			digitalWrite(led, 0)
+			break
+
+	except IOError:
+			print("Error")
+
+def getAlertText(temp, hum, tempmoy, tempext): 
+	# Fonction qui cree le texte a envoyer a l'utilisateur
+	# Les quatres parametres son la temp actuelle ,l'hum actuelle et la temp moyenne definit dans le fichier config et la temp exterieure
+
+	str = ""
+	if(temp == tempmoy):
+		return
 
 	if temp > tempmoy: # cas augmentation temperature
 		strt = strt + "La temperature de votre habitat est plus chaude que la temperature moyenne que vous avez definit. \n"
 		if temp > tempext: #on est en hiver
+			diffT = temp - tempmoy
 			if diffT < 2 && diffT > 0:
 				strt  = strt + "Consommation d'energie non necessaire.\n"
 			elif diffT < 4 && difT >= 2:
@@ -100,14 +110,7 @@ def getAlertText(diffT, temp, hum, tempmoy, tempext):
 		str = str + "Ce taux d’humidite est trop faible ce qui peut rendre votre respiration difficile, humidifiez votre habitat et pensez a bien vous hydrater. \n"
 
 	else if hum > 55:
-		str = str + "Ce taux d’humidite est trop élevé ventilez et aerez la maison et n’oubliez pas de bien vous hydrater. \n"
-
-
-def sendMailAlert(diffT, diffH):
-	getAlertText(diffT, diffH)
-	mail.sendMail()
-
-
+		str = str + "Ce taux d’humidite est trop élevé! Ventilez et aerez la maison et n’oubliez pas de bien vous hydrater. \n"
 
 
 if __name__=='__main__':
