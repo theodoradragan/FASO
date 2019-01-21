@@ -57,13 +57,18 @@ humidexToAdvice = [
 	(39, "Sensation de malaise assez grande. Prudence. Ralentir certaines activités en plein air."),
 	(45, "Sensation de malaise généralisée.  Danger. Eviter les efforts."),
 	(53, "Danger extrême.  Arrêt de travail dans de nombreux domaines."),
-	(100, "Coup de chaleur imminent (danger de mort).")
+	(100, "Coup de chaleur imminent (danger de mort)."),
 ]
 
 # Lookup table for humidity index
 humidex = {
 	# temperature : [(humidity, humidex)]
 	# on a mis humidex 20 pour les valeurs non trouvees dans la recherche, seulement pour avoir tous les cas possibles
+	16 : [(20, 20), (25, 20), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	17 : [(20, 20), (25, 20), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	18 : [(20, 20), (25, 20), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	19 : [(20, 20), (25, 20), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
+	20 : [(20, 20), (25, 20), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
 	21 : [(20, 20), (25, 20), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
 	22 : [(20, 20), (25, 20), (30, 20), (35, 22), (40, 22), (45, 23), (50, 24), (55, 25), (60, 26), (65, 27), (70, 28), (75, 29), (80, 30), (85, 30), (90, 31), (95, 31), (100, 31)],
 	23 : [(20, 20), (25, 20), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
@@ -109,16 +114,19 @@ def getAdvice(tempExt, humExt):
 	humIdxValue = 0
 	tempExtEntier = int(tempExt)
 
-	for (hum, humIdx) in humidex[tempExt]:
+	for (hum, humIdx) in humidex[tempExtEntier]:
 		if hum < humExt:
 			humIdxValue = humExt
 
 	i = 0
 	while i < len(humidexToAdvice):
 		(limiteSup, avis) = humidexToAdvice[i]
-		if limiteSup <= humIdxValue:
+		print(limiteSup)
+		print("<--->")
+		print(humIdxValue)
+		if limiteSup >= humIdxValue:
 			# We found the proper advice, we can stop searching for it
-			(_, advice) = humidexToAdvice[i - 1]
+			(_, advice) = humidexToAdvice[i]
 			break
 		i = i + 1
 
@@ -133,10 +141,12 @@ def playAdvice(advice):
 
 	# cette commande est pour assurer que l'output de son est analog
 	# c'est a dire les haut-parleurs.
-	command = "amixer cset numid=3 1"
+	command = "amixer cset numid=3 1 >/dev/null 2>&1 "
 	os.system(command)
 
-	command = 'espeak -vfr ' + advice
+	command = "espeak -vfr \" " + advice + " \" >/dev/null 2>&1 "
+	# print("Command is")
+	# print(command)
 	os.system(command)
 
 def getProximity():
@@ -150,12 +160,22 @@ def userAtDoor():
 	# Donnees : codeAdvice : int, type of difference
 	# Resultat : boolean, true if user is at the door
 
-	distance = getProximity()
+	somme = 0
+	for i in range(0, 10):
+		distance = getProximity()
+		time.sleep(0.1)
+		somme = somme + distance
+	distance = somme / 10
 	print("Distance is") # --> Debugging purposes
 	print(distance) # --> Debugging purposes
 	if distance < 5:
 		return True
-		
+	
 	return False
+
+
+if __name__ == '__main__':
+	while True:
+		print(getProximity())
 
 

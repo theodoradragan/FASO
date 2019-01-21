@@ -1,5 +1,6 @@
 import dweepy
 from grovepi import * 
+from sendAlert import *
 # Ca sera une bibliotheque pour gerer les temperatures et humidites : 
 # detecter, sauvegarder, chercher et comparer
 	
@@ -32,7 +33,7 @@ def saveTH(temperature,humidite):
 	# Donnees : temperature : float, humidite : float
 	# Resultat : -
 	
-	dweepy.dweet_for('JarvisThing', {'Temperature' : temperature, 'Humidite' : humidite})
+	dweepy.dweet_for('Assistant', {'Temperature' : temperature, 'Humidite' : humidite})
 
 def loadTH(heure):
 	
@@ -41,7 +42,7 @@ def loadTH(heure):
 	# Donnees : heure : float
 	# Resultat : Tuple (temperature,humidite)
 
-	dweeps = dweepy.get_dweets_for('JarvisThing')
+	dweeps = dweepy.get_dweets_for('Assistant')
 	resDweep = dweepy[0]['content']['Temperature']
 
 	for dweep in dweeps:
