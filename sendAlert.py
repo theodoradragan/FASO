@@ -46,11 +46,11 @@ def turnOffLed():
 def getAlertText(temp, hum, tempmoy, tempext): 
 	# Fonction qui cree le texte a envoyer a l'utilisateur
 	# Les quatres parametres son la temp actuelle ,l'hum actuelle et la temp moyenne definit dans le fichier config et la temp exterieure
-
-	str = ""
+	
 	if(temp == tempmoy):
-		return
-
+		return ""
+		
+	str = ""
 	if temp > tempmoy: # cas augmentation temperature
 		strt = strt + "La temperature de votre habitat est plus chaude que la temperature moyenne que vous avez definit. \n"
 		if temp > tempext: #on est en hiver

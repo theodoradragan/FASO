@@ -1,5 +1,4 @@
 import dweepy
-#import Adafruit_DHT
 from grovepi import * 
 # Ca sera une bibliotheque pour gerer les temperatures et humidites : 
 # detecter, sauvegarder, chercher et comparer

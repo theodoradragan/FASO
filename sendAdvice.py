@@ -6,6 +6,8 @@ import os # pour executer des commands en terminal linux
 from grovepi import *
 # et espeak pour text-to-speech
 
+ultrasonic_ranger = 7 # Digital entrance on board (D7)
+
 cloVetements = {
 	# sous-vetements
 	0.03 : "lingerie",
@@ -84,8 +86,6 @@ humidex = {
 	40 : [(20, 41), (25, 41), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
 	41 : [(20, 43), (25, 43), (30, 20), (35, 20), (40, 21), (45, 22), (50, 22), (55, 23), (60, 24), (65, 24), (70, 25), (75, 26), (80, 26), (85, 27), (90, 28), (95, 28), (100, 29)],
 }
-
-ultrasonic_ranger = 7 # Digital entrance on board (D7)
 
 def calculateCloNeeded(tempExt):
 	# Fonction qui calcule le clo indice pour savoir combien des vetements

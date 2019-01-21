@@ -34,8 +34,7 @@ def main():
 		# 	codeAlerte = compareJourTH(temp, hum, tempdh, humdh)
 
 		#if userAtDoor():
-			#playAdvice(getAdvice(tempInt, humInt, tempExt, humExt))
-			#print("Why u leavin meee?") # <-- normal behaviour, if sensor wouldn't have been broken
+			#playAdvice(getAdvice(tempInt, humInt, tempExt, humExt)) # <-- normal behaviour, if sensor wouldn't have been broken
 
 		if x % 5 == 0 : # pour simuler une sortie periodique de l'user
 			playAdvice(getAdvice(tempInt, humInt, tempExt, humExt))
@@ -48,7 +47,7 @@ def main():
         		turnOffLed()
 
     	except IOError:
-        print ("Error")
+        	print ("Error")
 
 		x = x + 1
 		if x == 2000:
