@@ -36,10 +36,6 @@ def turnOffLed():
 			print("Error")
 
 def getAlertText(temp, hum, tempmoy, tempext):
-	# print(temp)
-	# print(hum)
-	# print(tempmoy)
-	# print(tempext) 
 	# Fonction qui cree le texte a envoyer a l'utilisateur
 	# Les quatres parametres son la temp actuelle ,l'hum actuelle et la temp moyenne definit dans le fichier config et la temp exterieure
 	
@@ -63,7 +59,7 @@ def getAlertText(temp, hum, tempmoy, tempext):
 			elif (diffT < 6 and diffT >= 4):
 				strt = strt + "Pensez a eteindre le chauffage ou a diminuer le termostat. \n"
 			elif (diffT < 8 and diffT >= 6):
-				strt = strt + "Si vous n'avez pas prévu cette hausse de temperature. Verifiez ce qui a pu causer une hausse si importante en une heure. \n"
+				strt = strt + "Si vous n'avez pas prévu cette hausse de temperature, verifiez ce qui a pu causer une hausse si importante en une heure. \n"
 			else:
 				strt = strt + "Cet assistant ne permet pas de vous prevenir en cas d'incendie a votre domicile mais nous vous conseillons de verifier ce qui a pu entrainer cette hausse de temperature. \n"
 			strt = strt + "si ces informations ne vous semble pas pertinente verifier que la temperature moyenne definit via l'application mobile est celle que vous souhaitez dans votre habitat. \n"

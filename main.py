@@ -7,19 +7,22 @@ from sendAlert import *
 from affichage import *
 from datetime import datetime # pour obtenir l'heure courant
 from grovepi import *
+import json
 
 period = 5 # 5 secondes entre les detections
 button = 8
 tempmoy = 17
 
-def readFromConfig():
-	tempmoy = 17 # should be altered by config
+def readFromConfig(fileName):
+	with open(fileName) as f:
+		data = json.load(f)
+		return data["Temperature moyenne"]
 
 def main():
-	dweepy.dweet_for('Assistant', {'Temperature' : 25, 'Humidite' : 25})
-	# ^ Pour avoir des donnees en 'Assistant'
 	x = 0
-	inDemo = True # true pour le demo
+	tempmoy = readFromConfig("/home/pi/FASO/config.json")
+
+	inDemo = True # true pour le demo, pour avoir une alerte a montrer
 	while True:
 
 		# Turn off led if the button is pressed
@@ -27,56 +30,32 @@ def main():
 		if digitalRead(button) == 1 :
 			turnOffLed()
 
+		# On detectes les temperatures
 		[tempExt, humExt] = detectTHExterieure()
 		[tempInt, humInt] = detectTHInterieure()
 		
+		# On affiche les parametres interieurs sur l'ecran
 		printTH(tempInt, humInt)
 
-		print(tempInt, humInt)
-		print(tempExt, humExt)
-		
-		
-		# (tempdh, humdh) = loadTH(heure) # pour les alertes, on compare avec le jour dernier
-
+		# Si l'utilisateur veut entendre l'avis, on lui 'dit'
 		if userAtDoor():
 			advice = getAdvice(tempExt, humExt)
-			playAdvice(advice)
-			print(advice)
+			playAdvice(advice)			
 
-		# if x % 5 == 0 : # pour simuler une sortie periodique de l'user
-		# 	advice = getAdvice(tempExt, humExt)
-		# 	playAdvice(advice)
-		# 	print(advice)
-
-		# advice = getAdvice(tempExt, humExt) # debug , will delete
-		# print(advice) # debug , will delete
-		# playAdvice(advice) # debug , will delete
-		
-		# now = datetime.now()
-		# heure = now.hour
-		# minute = now.minute
-		# print("Heure")
-		# print(heure)
-		# print("Minute")
-		# print(minute)
-		# if (minute == 0):
-			
-
-		# Turn off led if the button is pressed
+		# Si le bouton est appuye, on enteint le LED
 
 		if digitalRead(button) == 1 :
 			turnOffLed()
 
-  #   	except IOError:
-  #       	print ("Error")
-
 		x = x + 1
-		if x >= 720 or inDemo : # would be 360 for each hour, will make 18 for demo / testing purposes
+
+		# On envoie le mail avec les alertes (si c'est le cas) chaque heure 
+		if x >= 720 or inDemo : # 720 pour chaque heure si la periode est 5
 			setAlert(tempInt, humInt, tempmoy, tempExt)
 			inDemo = False
 			x = x % 720
-		
 		time.sleep(period)
+
 
 if __name__ == '__main__':
 	main()
