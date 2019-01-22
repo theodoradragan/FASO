@@ -16,12 +16,11 @@ tempmoy = 17
 def readFromConfig(fileName):
 	with open(fileName) as f:
 		data = json.load(f)
-		return data["Temperature moyenne"]
+		return (data["Temperature moyenne"], data["Email"])
 
 def main():
 	x = 0
-	tempmoy = readFromConfig("/home/pi/FASO/config.json")
-
+	(tempmoy, email) = readFromConfig("/home/pi/FASO/config.json")
 	inDemo = True # true pour le demo, pour avoir une alerte a montrer
 	while True:
 
@@ -40,7 +39,8 @@ def main():
 		# Si l'utilisateur veut entendre l'avis, on lui 'dit'
 		if userAtDoor():
 			advice = getAdvice(tempExt, humExt)
-			playAdvice(advice)			
+			playAdvice(advice)
+			print(advice)	
 
 		# Si le bouton est appuye, on enteint le LED
 
@@ -51,7 +51,7 @@ def main():
 
 		# On envoie le mail avec les alertes (si c'est le cas) chaque heure 
 		if x >= 720 or inDemo : # 720 pour chaque heure si la periode est 5
-			setAlert(tempInt, humInt, tempmoy, tempExt)
+			setAlert(tempInt, humInt, tempmoy, tempExt, email)
 			inDemo = False
 			x = x % 720
 		time.sleep(period)

@@ -9,18 +9,12 @@ sender_email = "jarvis.faso@gmail.com"
 password = "FASO12345678"
 globalEmail = "theoa.dragan@yahoo.com"
 
-def setRecipient(email):
-	# Fonction pour etablir le mail pour les alertes
-	# Donnee : nouveau mail de l'utilisateur, string
-	# Resultat : -
-	globalEmail = email
 
-def setAlert(temp, hum, tempmoy, tempext):
+def setAlert(temp, hum, tempmoy, tempext, email):
+	if email is not None:
+		globalEmal = email
 
-	message = """\
-	Subject: Hi there
-
-	""" + getAlertText(temp, hum, tempmoy, tempext)
+	message = getAlertText(temp, hum, tempmoy, tempext)
 
 	# Create a secure SSL context
 	context = ssl.create_default_context()
